@@ -16,25 +16,41 @@ namespace TicTacToe.Core
 
         public void Run()
         {
-            Console.WriteLine(OutputMessages.WelcomeToTheGame);
-            Console.WriteLine(OutputMessages.GameRules);
-            board.DrawBoard();
-
             int count = 0;
             char symbol = ' ';
-            char position = char.Parse(Console.ReadLine());
-            while (count != 8)
+
+            while (true)
             {
-                if (board.WinnerCheck())
+                Console.WriteLine(OutputMessages.WelcomeToTheGame);
+
+                board.DrawBoard();
+
+                Console.Write(OutputMessages.EnterPosition);
+                int position = int.Parse(Console.ReadLine());
+
+                if (position < 1 || position > 9)
                 {
-                    break;
+                    do
+                    {
+                        Console.WriteLine(ExceptionMessages.InvalidNumber);
+                        Console.Write(OutputMessages.EnterPosition);
+                        position = int.Parse(Console.ReadLine());
+
+                    } while (position < 1 || position > 9);
                 }
 
-                Console.WriteLine(OutputMessages.ChosePosition);
-                position = char.Parse(Console.ReadLine());
+                if (board.WinnerCheck() || count == 8)
+                {
+                    Console.WriteLine(OutputMessages.PrintWinner, symbol);
+                    Console.WriteLine("Wants to continue? y/n");
 
-                if (position < 0 || position > 8)
+                    char command = char.Parse(Console.ReadLine());
 
+                    if (command == 'y')
+                    {
+
+                    }
+                }
 
                 if (count % 2 == 0)
                     symbol = 'X';
@@ -43,6 +59,8 @@ namespace TicTacToe.Core
 
                 board.SetSymbol(symbol, position);
                 count++;
+
+                Console.Clear();
             }
         }
     }
