@@ -22,6 +22,7 @@ namespace TicTacToe.Core
             while (true)
             {
                 Console.WriteLine(OutputMessages.WelcomeToTheGame);
+                Console.WriteLine(PrintGameRules());
 
                 board.DrawBoard();
 
@@ -62,6 +63,28 @@ namespace TicTacToe.Core
 
                 Console.Clear();
             }
+        }
+
+        private string PrintGameRules()
+        {
+            string rules = "Rules:" + Environment.NewLine +
+                OutputMessages.FirstGameRule + Environment.NewLine + 
+                OutputMessages.SecondGameRule + Environment.NewLine + 
+                OutputMessages.ThirdGameRule + Environment.NewLine + 
+                OutputMessages.FourthGameRule + Environment.NewLine +
+                OutputMessages.FifthGameRule + Environment.NewLine +
+                OutputMessages.SixthGameRule + Environment.NewLine;
+
+            string boardExample =  Environment.NewLine + 
+                "1 | 2 | 3" + Environment.NewLine +
+                "---------" + Environment.NewLine +
+                "4 | 5 | 6" + Environment.NewLine +
+                "---------" + Environment.NewLine +
+                "7 | 8 | 9" + Environment.NewLine;
+
+            rules += boardExample;
+
+            return rules;
         }
     }
 }
