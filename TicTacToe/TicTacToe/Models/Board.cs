@@ -23,31 +23,37 @@ namespace TicTacToe.Models
 
                 Console.WriteLine();
             }
+
+            Console.WriteLine();
         }
 
         public bool WinnerCheck()
         {
             if (CheckRows() || CheckCols() || CheckDiagonals())
                 return true;
-            else
-                return false;
+
+            return false;
         }
 
         public void SetSymbol(char symbol, int position)
         {
-            char currPosition = char.Parse(position.ToString());
+            int count = 0;
 
             for (int row = 0; row < board.GetLength(0); row++)
             {
+                if (row % 2 != 0)
+                    continue;
+
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
-                    if (board[row, col] == symbol)
-                    {
-                        Console.WriteLine(ExceptionMessages.AlreadyFilled);
-                    }
+                    if (board[row, col] == '-' || board[row, col] == 'X' || board[row, col] == 'O')
+                        count++;
 
-                    if (board[row, col] == currPosition)
+                    if (count == position)
                     {
+                        if (board[row, col] != '-')
+                            throw new ArgumentException(ExceptionMessages.AlreadyFilled);
+
                         board[row, col] = symbol;
                         return;
                     }
@@ -55,9 +61,14 @@ namespace TicTacToe.Models
             }
         }
 
+        public void ResetBoard()
+        {
+            CreateBoard();
+        }
+
         private void CreateBoard()
         {
-            char [,] board = 
+            char[,] board =
             {
                 {'-', ' ', '|', ' ', '-', ' ', '|', ' ', '-' },
                 {'-', '-', '-', '-', '-', '-', '-', '-', '-' },
@@ -115,22 +126,8 @@ namespace TicTacToe.Models
 
         private bool CheckDiagonals()
         {
-            for (int i = 0; i < 2; i++)
-            {
-                int countX = 0;
-                int countO = 0;
-
-                for (int y = 0; y < board.GetLength(0); y++)
-                {
-                    if (board[y, y] == 'X')
-                        countX++;
-                    else if (board[y, y] == 'O')
-                        countO++;
-                }
-
-                if (countX == 3 || countO == 3)
-                    return true;
-            }
+            if (countX == 3 || countO == 3)
+                return true;
 
             return false;
         }

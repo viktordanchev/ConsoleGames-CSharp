@@ -5,5 +5,6 @@
         void DrawBoard();
         bool WinnerCheck();
         void SetSymbol(char symbol, int position);
+        void ResetBoard();
     }
 }
