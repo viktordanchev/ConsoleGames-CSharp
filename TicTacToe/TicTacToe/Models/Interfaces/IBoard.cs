@@ -3,8 +3,10 @@
     public interface IBoard
     {
         void DrawBoard();
-        bool WinnerCheck();
         void SetSymbol(char symbol, int position);
         void ResetBoard();
+        bool CheckRows();
+        bool CheckColumns();
+        bool CheckDiagonals();
     }
 }

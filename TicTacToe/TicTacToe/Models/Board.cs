@@ -27,14 +27,6 @@ namespace TicTacToe.Models
             Console.WriteLine();
         }
 
-        public bool WinnerCheck()
-        {
-            if (CheckRows() || CheckCols() || CheckDiagonals())
-                return true;
-
-            return false;
-        }
-
         public void SetSymbol(char symbol, int position)
         {
             int count = 0;
@@ -66,21 +58,7 @@ namespace TicTacToe.Models
             CreateBoard();
         }
 
-        private void CreateBoard()
-        {
-            char[,] board =
-            {
-                {'-', ' ', '|', ' ', '-', ' ', '|', ' ', '-' },
-                {'-', '-', '-', '-', '-', '-', '-', '-', '-' },
-                {'-', ' ', '|', ' ', '-', ' ', '|', ' ', '-' },
-                {'-', '-', '-', '-', '-', '-', '-', '-', '-' },
-                {'-', ' ', '|', ' ', '-', ' ', '|', ' ', '-' }
-            };
-
-            this.board = board;
-        }
-
-        private bool CheckRows()
+        public bool CheckRows()
         {
             for (int row = 0; row < board.GetLength(0); row++)
             {
@@ -102,7 +80,7 @@ namespace TicTacToe.Models
             return false;
         }
 
-        private bool CheckCols()
+        public bool CheckColumns()
         {
             for (int col = 0; col < board.GetLength(1); col++)
             {
@@ -124,12 +102,42 @@ namespace TicTacToe.Models
             return false;
         }
 
-        private bool CheckDiagonals()
+        public bool CheckDiagonals()
         {
+            int countX = 0;
+            int countO = 0;
+
+            for (int row = 0; row < board.GetLength(0); row++)
+            {
+                if (row % 2 != 0)
+                {
+                    continue;
+                }
+
+                if (board[row, row] == 'X')
+                    countX++;
+                else if (board[row, row] == 'O')
+                    countO++;
+            }
+
             if (countX == 3 || countO == 3)
                 return true;
 
             return false;
+        }
+
+        private void CreateBoard()
+        {
+            char[,] board =
+            {
+                {'-', ' ', '|', ' ', '-', ' ', '|', ' ', '-' },
+                {'-', '-', '-', '-', '-', '-', '-', '-', '-' },
+                {'-', ' ', '|', ' ', '-', ' ', '|', ' ', '-' },
+                {'-', '-', '-', '-', '-', '-', '-', '-', '-' },
+                {'-', ' ', '|', ' ', '-', ' ', '|', ' ', '-' }
+            };
+
+            this.board = board;
         }
     }
 }

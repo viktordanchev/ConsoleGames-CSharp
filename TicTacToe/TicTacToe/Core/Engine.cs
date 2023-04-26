@@ -35,9 +35,9 @@ namespace TicTacToe.Core
 
                 board.DrawBoard();
 
-                if (board.WinnerCheck() || filledCells == 9)
+                if (WinnerCheck() || filledCells == 9)
                 {
-                    if (board.WinnerCheck())
+                    if (WinnerCheck())
                     {
                         Console.WriteLine(OutputMessages.PrintWinner, symbol);
 
@@ -84,6 +84,14 @@ namespace TicTacToe.Core
 
                 Console.Clear();
             }
+        }
+
+        private bool WinnerCheck()
+        {
+            if (board.CheckRows() || board.CheckColumns() || board.CheckDiagonals())
+                return true;
+
+            return false;
         }
 
         private int GetPosition()
