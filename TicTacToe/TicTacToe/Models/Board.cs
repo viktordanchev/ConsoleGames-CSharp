@@ -27,7 +27,7 @@ namespace TicTacToe.Models
             Console.WriteLine();
         }
 
-        public void SetSymbol(char symbol, int position)
+        public void SetSymbol(char symbol, string position)
         {
             int count = 0;
 
@@ -41,7 +41,7 @@ namespace TicTacToe.Models
                     if (board[row, col] == '-' || board[row, col] == 'X' || board[row, col] == 'O')
                         count++;
 
-                    if (count == position)
+                    if (count == int.Parse(position))
                     {
                         if (board[row, col] != '-')
                             throw new ArgumentException(ExceptionMessages.AlreadyFilled);

@@ -15,6 +15,6 @@
         public const string PrintDraw = "The game is draw.";
 
         public const string StartGame = "Press any key to start the game...";
-        public const string ContinueGame = "Press any key to play again...";
+        public const string ContinueGame = "Press any key to continue...";
     }
 }

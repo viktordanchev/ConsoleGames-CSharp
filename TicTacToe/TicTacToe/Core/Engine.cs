@@ -26,7 +26,7 @@ namespace TicTacToe.Core
             int myScore = 0;
             int enemyScore = 0;
             char symbol = 'X';
-            int position = 0;
+            string position = string.Empty;
 
             while (true)
             {
@@ -94,12 +94,15 @@ namespace TicTacToe.Core
             return false;
         }
 
-        private int GetPosition()
+        private string GetPosition()
         {
             Console.Write(OutputMessages.EnterPosition);
             string position = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(position) || int.Parse(position) < 1 || int.Parse(position) > 9)
+            if (string.IsNullOrWhiteSpace(position) ||
+                position.Length > 1 || 
+                char.IsLetter(char.Parse(position)) ||
+                int.Parse(position) == 0)
             {
                 do
                 {
@@ -107,10 +110,13 @@ namespace TicTacToe.Core
                     Console.Write(OutputMessages.EnterPosition);
                     position = Console.ReadLine();
 
-                } while (string.IsNullOrWhiteSpace(position) || int.Parse(position) < 1 || int.Parse(position) > 9);
+                } while (string.IsNullOrWhiteSpace(position) ||
+                position.Length > 1 || 
+                char.IsLetter(char.Parse(position)) ||
+                int.Parse(position) == 0);
             }
 
-            return int.Parse(position);
+            return position;
         }
 
         private void ContinueGame()

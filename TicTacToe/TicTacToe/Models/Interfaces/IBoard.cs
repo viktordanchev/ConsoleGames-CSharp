@@ -3,7 +3,7 @@
     public interface IBoard
     {
         void DrawBoard();
-        void SetSymbol(char symbol, int position);
+        void SetSymbol(char symbol, string position);
         void ResetBoard();
         bool CheckRows(char symbol);
         bool CheckColumns(char symbol);
