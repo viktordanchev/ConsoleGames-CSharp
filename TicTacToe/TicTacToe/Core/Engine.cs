@@ -98,20 +98,20 @@ namespace TicTacToe.Core
         private int GetPosition()
         {
             Console.Write(OutputMessages.EnterPosition);
-            int position = int.Parse(Console.ReadLine());
+            string position = Console.ReadLine();
 
-            if (position < 1 || position > 9)
+            if (string.IsNullOrWhiteSpace(position) || int.Parse(position) < 1 || int.Parse(position) > 9)
             {
                 do
                 {
                     Console.WriteLine(ExceptionMessages.InvalidNumber);
                     Console.Write(OutputMessages.EnterPosition);
-                    position = int.Parse(Console.ReadLine());
+                    position = Console.ReadLine();
 
-                } while (position < 1 || position > 9);
+                } while (string.IsNullOrWhiteSpace(position) || int.Parse(position) < 1 || int.Parse(position) > 9);
             }
 
-            return position;
+            return int.Parse(position);
         }
 
         private void ContinueGame()
