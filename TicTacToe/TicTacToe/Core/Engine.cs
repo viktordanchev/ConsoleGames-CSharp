@@ -8,7 +8,6 @@ namespace TicTacToe.Core
     public class Engine : IEngine
     {
         private readonly IBoard board;
-        private List<char> allowedSymbols = new List<char>() { 'X', 'O'};
 
         public Engine()
         {
