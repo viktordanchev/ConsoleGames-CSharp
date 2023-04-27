@@ -5,8 +5,8 @@
         void DrawBoard();
         void SetSymbol(char symbol, int position);
         void ResetBoard();
-        bool CheckRows();
-        bool CheckColumns();
-        bool CheckDiagonals();
+        bool CheckRows(char symbol);
+        bool CheckColumns(char symbol);
+        bool CheckDiagonals(char symbol);
     }
 }

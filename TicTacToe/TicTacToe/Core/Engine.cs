@@ -8,6 +8,7 @@ namespace TicTacToe.Core
     public class Engine : IEngine
     {
         private readonly IBoard board;
+        private List<char> allowedSymbols = new List<char>() { 'X', 'O'};
 
         public Engine()
         {
@@ -25,7 +26,7 @@ namespace TicTacToe.Core
             int filledCells = 0;
             int myScore = 0;
             int enemyScore = 0;
-            char symbol = ' ';
+            char symbol = 'X';
             int position = 0;
 
             while (true)
@@ -35,9 +36,9 @@ namespace TicTacToe.Core
 
                 board.DrawBoard();
 
-                if (WinnerCheck() || filledCells == 9)
+                if (WinnerCheck(symbol) || filledCells == 9)
                 {
-                    if (WinnerCheck())
+                    if (WinnerCheck(symbol))
                     {
                         Console.WriteLine(OutputMessages.PrintWinner, symbol);
 
@@ -86,9 +87,9 @@ namespace TicTacToe.Core
             }
         }
 
-        private bool WinnerCheck()
+        private bool WinnerCheck(char symbol)
         {
-            if (board.CheckRows() || board.CheckColumns() || board.CheckDiagonals())
+            if (board.CheckRows(symbol) || board.CheckColumns(symbol) || board.CheckDiagonals(symbol))
                 return true;
 
             return false;

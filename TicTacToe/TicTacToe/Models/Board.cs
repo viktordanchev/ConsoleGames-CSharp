@@ -58,69 +58,50 @@ namespace TicTacToe.Models
             CreateBoard();
         }
 
-        public bool CheckRows()
+        public bool CheckRows(char symbol)
         {
             for (int row = 0; row < board.GetLength(0); row++)
             {
-                int countX = 0;
-                int countO = 0;
+                int count = 0;
 
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
-                    if (board[row, col] == 'X')
-                        countX++;
-                    else if (board[row, col] == 'O')
-                        countO++;
+                    if (board[row, col] == symbol)
+                        count++;
                 }
 
-                if (countX == 3 || countO == 3)
+                if (count == 3)
                     return true;
             }
 
             return false;
         }
 
-        public bool CheckColumns()
+        public bool CheckColumns(char symbol)
         {
             for (int col = 0; col < board.GetLength(1); col++)
             {
-                int countX = 0;
-                int countO = 0;
+                int count = 0;
 
                 for (int row = 0; row < board.GetLength(0); row++)
                 {
-                    if (board[row, col] == 'X')
-                        countX++;
-                    else if (board[row, col] == 'O')
-                        countO++;
+                    if (board[row, col] == symbol)
+                        count++;
                 }
 
-                if (countX == 3 || countO == 3)
+                if (count == 3)
                     return true;
             }
 
             return false;
         }
 
-        public bool CheckDiagonals()
+        public bool CheckDiagonals(char symbol)
         {
-            int countX = 0;
-            int countO = 0;
+            if (board[0, 0] == symbol && board[2, 4] == symbol && board[4, 8] == symbol)
+                return true;
 
-            for (int row = 0; row < board.GetLength(0); row++)
-            {
-                if (row % 2 != 0)
-                {
-                    continue;
-                }
-
-                if (board[row, row] == 'X')
-                    countX++;
-                else if (board[row, row] == 'O')
-                    countO++;
-            }
-
-            if (countX == 3 || countO == 3)
+            if (board[0, 8] == symbol && board[2, 4] == symbol && board[4, 0] == symbol)
                 return true;
 
             return false;
