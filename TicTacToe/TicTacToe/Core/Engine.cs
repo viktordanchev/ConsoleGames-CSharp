@@ -63,7 +63,7 @@ namespace TicTacToe.Core
                 else
                     symbol = 'O';
 
-                bool IsNotSet = true;
+                bool IsPositionNotSetYet = true;
                 do
                 {
                     try
@@ -71,14 +71,14 @@ namespace TicTacToe.Core
                         position = GetPosition();
                         board.SetSymbol(symbol, position);
 
-                        IsNotSet = false;
+                        IsPositionNotSetYet = false;
                     }
                     catch (ArgumentException ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
 
-                } while (IsNotSet);
+                } while (IsPositionNotSetYet);
 
                 filledCells++;
 
