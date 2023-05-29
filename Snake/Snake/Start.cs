@@ -1,5 +1,4 @@
-﻿using SimpleSnake.Utilities;
-using Snake.Core;
+﻿using Snake.Core;
 using Snake.Core.Interfaces;
 
 namespace Snake
@@ -8,7 +7,8 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            ConsoleWindow.CustomizeConsole();
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
             IEngine engine = new Engine();
             engine.Run();
         }
