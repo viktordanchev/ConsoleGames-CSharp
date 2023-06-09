@@ -1,33 +1,77 @@
-﻿using System.Linq.Expressions;
-
-namespace Snake.Models
+﻿namespace Snake.Models
 {
     public class Board
     {
-        private const char Symbol = '\u25A0';
+        private char[,] board;
 
-        public Board()
+        public Board(int rows, int cols)
         {
-            DrawBoard();
+            board = new char[rows, cols];
+            CreateBoard(board);
         }
 
-        private void DrawBoard()
+        private void CreateBoard(char[,] board)
         {
-            for (int horizontal = 0; horizontal < 40; horizontal++)
+            char symbol = ' ';
+
+            for (int row = 0; row < board.GetLength(0); row++)
             {
-                Console.Write(Symbol);
+                for (int col = 0; col < board.GetLength(1); col++)
+                {
+                    if (row == 0 && col == 0)
+                    {
+                        symbol = '\u2554';
+                        //u2554 = ╔
+                    }
+                    else if (row == 0 && col == board.GetLength(1))
+                    {
+                        symbol = '\u2557';
+                        //u2557 = ╗
+                    }
+                    else if (row)
+                    {
+
+                    }
+                }
             }
+        }
 
-            Console.WriteLine();
+        private void SetHorizontal()
+        {
+            char symbol = ' ';
 
-            for (int vertical = 1; vertical < 15; vertical++)
+            for (int col = 0; col < board.GetLength(1); col++)
             {
-                Console.WriteLine(Symbol);
+                if (col == 0)
+                {
+                    symbol = '\u2554';
+                    //u2554 = ╔
+                }
+                else if (col == board.GetLength(1))
+                {
+                    symbol = '\u2557';
+                    //u2554 = ╗
+                }
+                else
+                {
+                    symbol = '\u2550';
+                    //u2550 = ═
+                }
+
+                board[row, col] = symbol;
             }
+        }
 
-            for(int horizontal = 0; horizontal < 40; horizontal++)
+        public void DrawBoard()
+        {
+            for (int row = 0; row < board.GetLength(0); row++)
             {
-                Console.Write(Symbol);
+                for (int col = 0; col < board.GetLength(1); col++)
+                {
+                    Console.Write(board[row, col]);
+                }
+
+                Console.WriteLine();
             }
         }
     }

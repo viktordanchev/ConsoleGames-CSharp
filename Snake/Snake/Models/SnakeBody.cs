@@ -8,7 +8,5 @@
         public SnakeBody()
         {
         }
-
-        private void m
     }
 }

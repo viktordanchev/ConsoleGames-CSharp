@@ -10,13 +10,13 @@ namespace Snake.Core
 
         public Engine()
         {
-            board = new Board();
+            board = new Board(20, 40);
             snakeBody = new SnakeBody();
         }
 
         public void Run()
         {
-            
+            board.DrawBoard();
         }
     }
 }
