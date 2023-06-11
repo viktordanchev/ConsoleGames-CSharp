@@ -17,6 +17,15 @@ namespace Snake.Core
         public void Run()
         {
             board.DrawBoard();
+
+            while (true)
+            {
+                Console.SetCursorPosition(41, 0);
+                Console.Write("score");
+                Console.CursorVisible = false;
+
+                Thread.Sleep(100);
+            }
         }
     }
 }
