@@ -1,7 +1,7 @@
-﻿using Snake.Core;
-using Snake.Core.Interfaces;
+﻿using SimpleSnake.Core;
+using SimpleSnake.Core.Interfaces;
 
-namespace Snake
+namespace SimpleSnake
 {
     internal class Start
     {

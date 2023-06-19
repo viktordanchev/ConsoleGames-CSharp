@@ -1,4 +1,4 @@
-﻿namespace Snake.Core.Interfaces
+﻿namespace SimpleSnake.Core.Interfaces
 {
     public interface IEngine
     {

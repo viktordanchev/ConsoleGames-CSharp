@@ -1,31 +1,76 @@
-﻿using Snake.Core.Interfaces;
-using Snake.Models;
+﻿using SimpleSnake.Core.Interfaces;
+using SimpleSnake.Enums;
+using SimpleSnake.Models;
 
-namespace Snake.Core
+namespace SimpleSnake.Core
 {
     public class Engine : IEngine
     {
-        private Board board;
-        private SnakeBody snakeBody;
+        private GameBoard board;
+        private Snake snake;
+        private Food food;
+        private Direction direction;
 
         public Engine()
         {
-            board = new Board(20, 40);
-            snakeBody = new SnakeBody();
+            board = new GameBoard(20, 40);
+            snake = new Snake();
+            food = new Food();
+            direction = Direction.Down;
         }
 
         public void Run()
         {
-            board.DrawBoard();
+            int row = 1;
+            int col = 20;
 
             while (true)
             {
-                Console.SetCursorPosition(41, 0);
-                Console.Write("score");
-                Console.CursorVisible = false;
+                board.DrawBoard();
+                board.AddToBoard(row++, col, 'a');
 
                 Thread.Sleep(100);
+                Console.Clear();
             }
+        }
+
+        private void GetDirection()
+        {
+            ConsoleKeyInfo input = Console.ReadKey();
+
+            if (input.Key == ConsoleKey.D || input.Key == ConsoleKey.RightArrow)
+            {
+                if (direction != Direction.Left)
+                {
+                    direction = Direction.Right;
+                }
+            }
+            else if (input.Key == ConsoleKey.A || input.Key == ConsoleKey.LeftArrow)
+            {
+                if (direction != Direction.Right)
+                {
+                    direction = Direction.Left;
+                }
+            }
+            else if (input.Key == ConsoleKey.S || input.Key == ConsoleKey.DownArrow)
+            {
+                if (direction != Direction.Up)
+                {
+                    direction = Direction.Down;
+                }
+            }
+            else if (input.Key == ConsoleKey.W || input.Key == ConsoleKey.UpArrow)
+            {
+                if (direction != Direction.Down)
+                {
+                    direction = Direction.Up;
+                }
+            }
+        }
+
+        private void CreateDirection()
+        {
+
         }
     }
 }
