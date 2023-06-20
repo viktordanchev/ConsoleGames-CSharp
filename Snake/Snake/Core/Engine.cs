@@ -16,18 +16,23 @@ namespace SimpleSnake.Core
             board = new GameBoard(20, 40);
             snake = new Snake();
             food = new Food();
-            direction = Direction.Down;
+            direction = Direction.Right;
         }
 
         public void Run()
         {
-            int row = 1;
-            int col = 20;
+            snake.CreateSnake(board);
 
             while (true)
             {
+                if (Console.KeyAvailable)
+                {
+                    GetDirection();
+                }
+
+                food.PlaceFoodOnBoard(board);
                 board.DrawBoard();
-                board.AddToBoard(row++, col, 'a');
+                snake.Move(direction, board);
 
                 Thread.Sleep(100);
                 Console.Clear();
@@ -66,11 +71,6 @@ namespace SimpleSnake.Core
                     direction = Direction.Up;
                 }
             }
-        }
-
-        private void CreateDirection()
-        {
-
         }
     }
 }

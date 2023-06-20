@@ -16,7 +16,10 @@
                 col = random.Next(1, 39);
             } while (board.Board[row, col] != ' ');
 
-            board.AddToBoard(row, col, Symbol);
+            if (!board.IsBoardHasFood(Symbol))
+            {
+                board.AddToBoard(row, col, Symbol);
+            }
         }
     }
 }

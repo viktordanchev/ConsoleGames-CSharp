@@ -7,46 +7,65 @@ namespace SimpleSnake.Models
         private const char BodySymbol = '\u25CF';
         private const char HeadSymbol = '\u263B';
 
-        public void PlaceSnakeOnBoard(GameBoard board)
+        public Snake()
         {
-            int row = 1;
-            int col = 20;
+            Row = 1;
+            Col = 20;
+            SnakeLength = 6;
+            TailPosition = new();
+            HeadPosition = new();
+        }
 
-            for (int i = 1; i <= 6; i++)
+        public int SnakeLength { get; }
+        private int Row { get; set; }
+        private int Col { get; set; }
+        private Position TailPosition { get; set; }
+        private Position HeadPosition { get; set; }
+
+        public void CreateSnake(GameBoard board)
+        {
+            char symbol = BodySymbol;
+
+            for (int i = 1; i <= SnakeLength; i++)
             {
-                if (i == 6)
+                if (i == SnakeLength)
                 {
-                    board.AddToBoard(row++, col, HeadSymbol);
-                    continue;
+                    HeadPosition.Row = Row;
+                    HeadPosition.Col = Col;
+                    symbol = HeadSymbol;
+                }
+                else if (TailPosition.Row == 0 || TailPosition.Col == 0)
+                {
+                    TailPosition.Row = Row;
+                    TailPosition.Col = Col;
                 }
 
-                board.AddToBoard(row++, col, BodySymbol);
+                board.AddToBoard(Row++, Col, symbol);
             }
         }
 
         public void Move(Direction direction, GameBoard board)
         {
-            int row = 0;
-            int col = 0;
+            board.Board[HeadPosition.Row, HeadPosition.Col] = BodySymbol;
 
             if (direction == Direction.Right)
             {
-                col++;
+                HeadPosition.Col++;
             }
             else if (direction == Direction.Left)
             {
-                col--;
+                HeadPosition.Col--;
             }
             else if (direction == Direction.Down)
             {
-                row++;
+                HeadPosition.Row++;
             }
             else if (direction == Direction.Up)
             {
-                row--;
+                HeadPosition.Row--;
             }
 
-            board.AddToBoard(row, col, HeadSymbol);
+            board.AddToBoard(HeadPosition.Row, HeadPosition.Col, HeadSymbol);
         }
     }
 }

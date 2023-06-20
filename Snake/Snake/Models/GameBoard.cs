@@ -17,6 +17,40 @@
             get => board;
         }
 
+        public void DrawBoard()
+        {
+            for (int row = 0; row < Board.GetLength(0); row++)
+            {
+                for (int col = 0; col < Board.GetLength(1); col++)
+                {
+                    Console.Write(Board[row, col]);
+                }
+
+                Console.WriteLine();
+            }
+        }
+
+        public void AddToBoard(int row, int col, char symbol)
+        {
+            board[row, col] = symbol;
+        }
+
+        public bool IsBoardHasFood(char symbol)
+        {
+            for (int row = 0; row < Board.GetLength(0); row++)
+            {
+                for (int col = 0; col < Board.GetLength(1); col++)
+                {
+                    if (Board[row, col] == symbol)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         private void CreateBoard(char[,] board)
         {
             for (int row = 0; row < board.GetLength(0); row++)
@@ -39,41 +73,6 @@
                     board[row, col] = ' ';
                 }
             }
-        }
-
-        public void DrawBoard()
-        {
-            for (int row = 0; row < Board.GetLength(0); row++)
-            {
-                for (int col = 0; col < Board.GetLength(1); col++)
-                {
-                    Console.Write(Board[row, col]);
-                }
-
-                Console.WriteLine();
-            }
-        }
-
-        public void IsBoardHasFood(Food food) 
-        {
-            for (int row = 0; row < Board.GetLength(0); row++)
-            {
-                for (int col = 0; col < Board.GetLength(1); col++)
-                {
-                    if (board[row, col] == )
-                    {
-
-                    }
-                }
-
-                Console.WriteLine();
-            }
-        }
-
-
-        public void AddToBoard(int row, int col, char symbol)
-        {
-            board[row, col] = symbol;
         }
     }
 }
