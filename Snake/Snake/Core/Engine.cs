@@ -31,10 +31,10 @@ namespace SimpleSnake.Core
                 }
 
                 food.PlaceFoodOnBoard(board);
-                board.DrawBoard();
                 snake.Move(direction, board);
+                board.DrawBoard();
 
-                Thread.Sleep(100);
+                Thread.Sleep(300);
                 Console.Clear();
             }
         }
@@ -43,28 +43,28 @@ namespace SimpleSnake.Core
         {
             ConsoleKeyInfo input = Console.ReadKey();
 
-            if (input.Key == ConsoleKey.D || input.Key == ConsoleKey.RightArrow)
+            if (input.Key == ConsoleKey.RightArrow)
             {
                 if (direction != Direction.Left)
                 {
                     direction = Direction.Right;
                 }
             }
-            else if (input.Key == ConsoleKey.A || input.Key == ConsoleKey.LeftArrow)
+            else if (input.Key == ConsoleKey.LeftArrow)
             {
                 if (direction != Direction.Right)
                 {
                     direction = Direction.Left;
                 }
             }
-            else if (input.Key == ConsoleKey.S || input.Key == ConsoleKey.DownArrow)
+            else if (input.Key == ConsoleKey.DownArrow)
             {
                 if (direction != Direction.Up)
                 {
                     direction = Direction.Down;
                 }
             }
-            else if (input.Key == ConsoleKey.W || input.Key == ConsoleKey.UpArrow)
+            else if (input.Key == ConsoleKey.UpArrow)
             {
                 if (direction != Direction.Down)
                 {

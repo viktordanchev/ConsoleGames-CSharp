@@ -4,6 +4,8 @@
     {
         private const char Symbol = '@';
 
+        public Position Position { get; }
+
         public void PlaceFoodOnBoard(GameBoard board)
         {
             int row = 0;
@@ -18,7 +20,9 @@
 
             if (!board.IsBoardHasFood(Symbol))
             {
-                board.AddToBoard(row, col, Symbol);
+                board.Board[row, col] = Symbol;
+                Position.Row = row;
+                Position.Col = col;
             }
         }
     }

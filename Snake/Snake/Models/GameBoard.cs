@@ -30,11 +30,6 @@
             }
         }
 
-        public void AddToBoard(int row, int col, char symbol)
-        {
-            board[row, col] = symbol;
-        }
-
         public bool IsBoardHasFood(char symbol)
         {
             for (int row = 0; row < Board.GetLength(0); row++)
