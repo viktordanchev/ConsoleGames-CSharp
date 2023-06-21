@@ -4,6 +4,11 @@
     {
         private const char Symbol = '@';
 
+        public Food()
+        {
+            Position = new();
+        }
+
         public Position Position { get; }
 
         public void PlaceFoodOnBoard(GameBoard board)

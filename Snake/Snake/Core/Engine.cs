@@ -16,7 +16,7 @@ namespace SimpleSnake.Core
             board = new GameBoard(20, 40);
             snake = new Snake();
             food = new Food();
-            direction = Direction.Right;
+            direction = Direction.Down;
         }
 
         public void Run()
@@ -27,19 +27,22 @@ namespace SimpleSnake.Core
             {
                 if (Console.KeyAvailable)
                 {
-                    GetDirection();
+                    CreateDirection();
                 }
 
+                snake.GetDirection(direction);
+
                 food.PlaceFoodOnBoard(board);
-                snake.Move(direction, board);
+                snake.Move(board);
+                snake.Eat(food, board);
                 board.DrawBoard();
 
-                Thread.Sleep(300);
+                Thread.Sleep(100);
                 Console.Clear();
             }
         }
 
-        private void GetDirection()
+        private void CreateDirection()
         {
             ConsoleKeyInfo input = Console.ReadKey();
 

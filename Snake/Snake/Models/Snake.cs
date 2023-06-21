@@ -9,51 +9,67 @@ namespace SimpleSnake.Models
 
         public Snake()
         {
-            Row = 1;
+            Row = 6;
             Col = 20;
-            TailPosition = new();
-            HeadPosition = new();
             SnakeBody = new List<Position>();
         }
 
         public List<Position> SnakeBody { get; }
         private int Row { get; set; }
         private int Col { get; set; }
-        private Position TailPosition { get; set; }
-        private Position HeadPosition { get; set; }
 
         public void CreateSnake(GameBoard board)
         {
             char symbol = BodySymbol;
 
-            for (int i = 1; i <= 6; i++)
+            for (int row = 1; row <= 6; row++)
             {
-                if (i == 6)
+                if (row == 6)
                 {
-                    HeadPosition.Row = Row;
-                    HeadPosition.Col = Col;
                     symbol = HeadSymbol;
                 }
-                else if (TailPosition.Row == 0 || TailPosition.Col == 0)
-                {
-                    TailPosition.Row = Row;
-                    TailPosition.Col = Col;
-                }
 
-                board.Board[Row, Col] = symbol;
-                SnakeBody.Add(new(Row, Col));
-                Row++;
+                board.Board[row, Col] = symbol;
+                SnakeBody.Add(new(row, Col));
             }
         }
 
-        public void Move(Direction direction, GameBoard board)
+        public void Move(GameBoard board)
         {
-            Position newTailPosition = SnakeBody[1];
-            SnakeBody.RemoveAt(0);
-            board.Board[HeadPosition.Row, HeadPosition.Col] = BodySymbol;
-            board.Board[TailPosition.Row, TailPosition.Col] = ' ';
-            TailPosition = newTailPosition;
+            Position tailPosition = SnakeBody[0];
+            Position headPosition = SnakeBody[SnakeBody.Count - 1];
+            board.Board[headPosition.Row, headPosition.Col] = BodySymbol;
+            board.Board[tailPosition.Row, tailPosition.Col] = ' ';
+        
+            board.Board[Row, Col] = HeadSymbol;
+            SnakeBody.Add(new(Row, Col));
+            headPosition = SnakeBody[SnakeBody.Count - 1];
+        }
+        
+        public void Eat(Food food, GameBoard board)
+        {
+            Position headPosition = SnakeBody[SnakeBody.Count - 1];
+            Position tailPosition = SnakeBody[0];
 
+            if (headPosition.Row == food.Position.Row && headPosition.Col == food.Position.Col)
+            {
+                board.Board[tailPosition.Row, tailPosition.Col] = BodySymbol;
+            }
+            else
+            {
+                SnakeBody.RemoveAt(0);
+            }
+        }
+
+        public bool IsMoving(GameBoard board)
+        {
+            Position headPosition = SnakeBody[SnakeBody.Count - 1];
+
+            return true;
+        }
+
+        public void GetDirection(Direction direction)
+        {
             if (direction == Direction.Right)
             {
                 Col++;
@@ -69,19 +85,6 @@ namespace SimpleSnake.Models
             else if (direction == Direction.Up)
             {
                 Row--;
-            }
-
-            board.Board[Row, Col] = HeadSymbol;
-            SnakeBody.Add(new(Row, Col));
-            HeadPosition = SnakeBody[5];
-        }
-
-        public void Eat(Food food, GameBoard board)
-        {
-            if (HeadPosition == food.Position)
-            {
-                board.Board[TailPosition.Row, TailPosition.Col] = ' ';
-                TailPosition = newTailPosition;
             }
         }
     }
