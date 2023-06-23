@@ -40,12 +40,12 @@ namespace SimpleSnake.Models
             Position headPosition = SnakeBody[SnakeBody.Count - 1];
             board.Board[headPosition.Row, headPosition.Col] = BodySymbol;
             board.Board[tailPosition.Row, tailPosition.Col] = ' ';
-        
+
             board.Board[Row, Col] = HeadSymbol;
             SnakeBody.Add(new(Row, Col));
             headPosition = SnakeBody[SnakeBody.Count - 1];
         }
-        
+
         public void Eat(Food food, GameBoard board)
         {
             Position headPosition = SnakeBody[SnakeBody.Count - 1];
@@ -64,6 +64,11 @@ namespace SimpleSnake.Models
         public bool IsMoving(GameBoard board)
         {
             Position headPosition = SnakeBody[SnakeBody.Count - 1];
+
+            if (headPosition.Row == 0 || headPosition.Row == 20 || headPosition.Col == 0 || headPosition.Col == 40)
+            {
+                return false;
+            }
 
             return true;
         }

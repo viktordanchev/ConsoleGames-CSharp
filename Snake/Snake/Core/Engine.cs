@@ -37,6 +37,23 @@ namespace SimpleSnake.Core
                 snake.Eat(food, board);
                 board.DrawBoard();
 
+                if (!snake.IsMoving(board))
+                {
+                    int row = 21;
+                    int col = 3;  
+                    
+                    Console.SetCursorPosition(row, col);
+                    Console.WriteLine("Would you like to restart? y/n");
+
+                    string input = Console.ReadLine();
+
+                    if (input == "y")
+                    {
+                        Console.Clear();
+                        Run();
+                    }
+                }
+
                 Thread.Sleep(100);
                 Console.Clear();
             }
