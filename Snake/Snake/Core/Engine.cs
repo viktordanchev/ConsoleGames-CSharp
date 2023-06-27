@@ -32,7 +32,7 @@ namespace SimpleSnake.Core
 
                 snake.GetDirection(direction);
 
-                if (!snake.IsMoving())
+                if (!snake.IsMoving(board))
                 {
                     AskForRestart();
                 }

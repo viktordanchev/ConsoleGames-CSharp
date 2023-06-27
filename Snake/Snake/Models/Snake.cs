@@ -63,9 +63,12 @@ namespace SimpleSnake.Models
             }
         }
 
-        public bool IsMoving()
+        public bool IsMoving(GameBoard board)
         {
-            if (Row == 0 || Row == 19 || Col == 0 || Col == 39)
+            Position headPosition = SnakeBody[SnakeBody.Count - 1];
+
+            if (Row == 0 || Row == 19 || Col == 0 || Col == 39 ||
+                board.Board[Row, Col] == BodySymbol)
             {
                 return false;
             }
