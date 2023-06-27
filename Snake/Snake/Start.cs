@@ -5,7 +5,7 @@ namespace SimpleSnake
 {
     public class Start
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 

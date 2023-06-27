@@ -14,7 +14,7 @@ namespace SimpleSnake.Core
         public Engine()
         {
             board = new GameBoard(20, 40);
-            snake = new Snake();
+            snake = new Snake(6, 20);
             food = new Food();
             direction = Direction.Down;
         }
@@ -32,30 +32,42 @@ namespace SimpleSnake.Core
 
                 snake.GetDirection(direction);
 
+                if (!snake.IsMoving())
+                {
+                    AskForRestart();
+                }
+
                 food.PlaceFoodOnBoard(board);
                 snake.Move(board);
                 snake.Eat(food, board);
                 board.DrawBoard();
 
-                if (!snake.IsMoving(board))
-                {
-                    int row = 21;
-                    int col = 3;  
-                    
-                    Console.SetCursorPosition(row, col);
-                    Console.WriteLine("Would you like to restart? y/n");
-
-                    string input = Console.ReadLine();
-
-                    if (input == "y")
-                    {
-                        Console.Clear();
-                        Run();
-                    }
-                }
-
-                Thread.Sleep(100);
+                ShowScore(snake);
+                Thread.Sleep(150);
                 Console.Clear();
+            }
+        }
+
+        private void ShowScore(Snake snake)
+        {
+            Console.SetCursorPosition(41, 0);
+            Console.WriteLine($"Score: {snake.Score}");
+        }
+
+        private void AskForRestart()
+        {
+            int row = 21;
+            int col = 3;
+
+            Console.SetCursorPosition(row, col);
+            Console.WriteLine("Would you like to restart? y/n");
+
+            ConsoleKeyInfo key = Console.ReadKey();
+
+            if (key.Key == ConsoleKey.Y)
+            {
+                Console.Clear();
+                Start.Main();
             }
         }
 

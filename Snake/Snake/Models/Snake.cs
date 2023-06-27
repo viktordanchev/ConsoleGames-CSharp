@@ -7,14 +7,15 @@ namespace SimpleSnake.Models
         private const char BodySymbol = '\u25CF';
         private const char HeadSymbol = '\u263B';
 
-        public Snake()
+        public Snake(int row, int col)
         {
-            Row = 6;
-            Col = 20;
+            Row = row;
+            Col = col;
             SnakeBody = new List<Position>();
         }
 
         public List<Position> SnakeBody { get; }
+        public int Score { get; private set; }
         private int Row { get; set; }
         private int Col { get; set; }
 
@@ -54,6 +55,7 @@ namespace SimpleSnake.Models
             if (headPosition.Row == food.Position.Row && headPosition.Col == food.Position.Col)
             {
                 board.Board[tailPosition.Row, tailPosition.Col] = BodySymbol;
+                Score++;
             }
             else
             {
@@ -61,11 +63,9 @@ namespace SimpleSnake.Models
             }
         }
 
-        public bool IsMoving(GameBoard board)
+        public bool IsMoving()
         {
-            Position headPosition = SnakeBody[SnakeBody.Count - 1];
-
-            if (headPosition.Row == 0 || headPosition.Row == 20 || headPosition.Col == 0 || headPosition.Col == 40)
+            if (Row == 0 || Row == 19 || Col == 0 || Col == 39)
             {
                 return false;
             }
