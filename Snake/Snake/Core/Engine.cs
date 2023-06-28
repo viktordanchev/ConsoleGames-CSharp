@@ -69,6 +69,11 @@ namespace SimpleSnake.Core
                 Console.Clear();
                 Start.Main();
             }
+            else if(key.Key == ConsoleKey.N)
+            {
+                Console.ReadKey();
+                Console.WriteLine("Press any key to continue...");
+            }
         }
 
         private void CreateDirection()
