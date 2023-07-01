@@ -34,10 +34,7 @@ namespace SimpleSnake.Core
 
                 if (!snake.IsMoving(board))
                 {
-                    if (!AskForRestart())
-                    {
-                        break;
-                    }
+                    AskForRestart();
                 }
 
                 food.PlaceFoodOnBoard(board);
@@ -57,25 +54,30 @@ namespace SimpleSnake.Core
             Console.WriteLine($"Score: {snake.Score}");
         }
 
-        private bool AskForRestart()
+        private void AskForRestart()
         {
             int row = 21;
             int col = 3;
 
-            Console.SetCursorPosition(row, col);
-            Console.WriteLine("Would you like to restart? y/n");
+            ConsoleKeyInfo key;
 
-            ConsoleKeyInfo key = Console.ReadKey();
+            do
+            {
+                Console.SetCursorPosition(row, col);
+                Console.WriteLine("Would you like to restart? y/n");
+                key = Console.ReadKey();
+            } while (key.Key != ConsoleKey.Y && key.Key != ConsoleKey.N);
 
             Console.Clear();
 
             if (key.Key == ConsoleKey.Y)
             {
                 Start.Main();
-                return true;
             }
-
-            return false;
+            else if (key.Key == ConsoleKey.N)
+            { 
+                Environment.Exit(0);
+            }
         }
 
         private void CreateDirection()
