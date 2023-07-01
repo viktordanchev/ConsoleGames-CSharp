@@ -110,6 +110,8 @@ namespace SimpleSnake.Core
                     direction = Direction.Up;
                 }
             }
+
+            Console.CursorVisible = false;
         }
     }
 }
