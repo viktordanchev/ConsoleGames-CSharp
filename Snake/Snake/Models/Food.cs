@@ -23,9 +23,10 @@
                 col = random.Next(1, 39);
             } while (board.Board[row, col] != ' ');
 
-            if (!board.IsBoardHasFood(Symbol))
+            if (Position.Row == 0 && Position.Col == 0)
             {
-                board.Board[row, col] = Symbol;
+                Console.SetCursorPosition(col, row);
+                Console.Write(Symbol);
                 Position.Row = row;
                 Position.Col = col;
             }

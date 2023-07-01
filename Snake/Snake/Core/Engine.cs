@@ -22,6 +22,7 @@ namespace SimpleSnake.Core
         public void Run()
         {
             snake.CreateSnake(board);
+            board.DrawBoard();
 
             while (true)
             {
@@ -38,13 +39,11 @@ namespace SimpleSnake.Core
                 }
 
                 food.PlaceFoodOnBoard(board);
-                snake.Move(board);
-                snake.Eat(food, board);
-                board.DrawBoard();
+                snake.Move();
+                snake.Eat(food);
 
                 ShowScore(snake);
                 Thread.Sleep(150);
-                Console.Clear();
             }
         }
 
@@ -56,6 +55,8 @@ namespace SimpleSnake.Core
 
         private void AskForRestart()
         {
+            Console.Clear();
+
             int row = 21;
             int col = 3;
 
@@ -67,8 +68,6 @@ namespace SimpleSnake.Core
                 Console.WriteLine("Would you like to restart? y/n");
                 key = Console.ReadKey();
             } while (key.Key != ConsoleKey.Y && key.Key != ConsoleKey.N);
-
-            Console.Clear();
 
             if (key.Key == ConsoleKey.Y)
             {

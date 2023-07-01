@@ -35,26 +35,32 @@ namespace SimpleSnake.Models
             }
         }
 
-        public void Move(GameBoard board)
+        public void Move()
         {
             Position tailPosition = SnakeBody[0];
             Position headPosition = SnakeBody[SnakeBody.Count - 1];
-            board.Board[headPosition.Row, headPosition.Col] = BodySymbol;
-            board.Board[tailPosition.Row, tailPosition.Col] = ' ';
+            Console.SetCursorPosition(headPosition.Col, headPosition.Row);
+            Console.Write(BodySymbol);
+            Console.SetCursorPosition(tailPosition.Col, tailPosition.Row);
+            Console.Write(' ');
 
-            board.Board[Row, Col] = HeadSymbol;
+            Console.SetCursorPosition(Col, Row);
+            Console.Write(HeadSymbol);
             SnakeBody.Add(new(Row, Col));
             headPosition = SnakeBody[SnakeBody.Count - 1];
         }
 
-        public void Eat(Food food, GameBoard board)
+        public void Eat(Food food)
         {
             Position headPosition = SnakeBody[SnakeBody.Count - 1];
             Position tailPosition = SnakeBody[0];
 
             if (headPosition.Row == food.Position.Row && headPosition.Col == food.Position.Col)
             {
-                board.Board[tailPosition.Row, tailPosition.Col] = BodySymbol;
+                Console.SetCursorPosition(tailPosition.Col, tailPosition.Row);
+                Console.Write(BodySymbol);
+                food.Position.Row = 0;
+                food.Position.Col = 0;
                 Score++;
             }
             else
@@ -65,8 +71,6 @@ namespace SimpleSnake.Models
 
         public bool IsMoving(GameBoard board)
         {
-            Position headPosition = SnakeBody[SnakeBody.Count - 1];
-
             if (Row == 0 || Row == 19 || Col == 0 || Col == 39 ||
                 board.Board[Row, Col] == BodySymbol)
             {
