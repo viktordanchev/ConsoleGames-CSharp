@@ -11,7 +11,7 @@
 
         public Position Position { get; }
 
-        public void PlaceFoodOnBoard(GameBoard board)
+        public void PlaceFoodOnBoard(Snake snake)
         {
             int row = 0;
             int col = 0;
@@ -21,7 +21,7 @@
             {
                 row = random.Next(1, 19);
                 col = random.Next(1, 39);
-            } while (board.Board[row, col] != ' ');
+            } while (snake.SnakeBody.Any(p => p.Row == row && p.Col == col));
 
             if (Position.Row == 0 && Position.Col == 0)
             {

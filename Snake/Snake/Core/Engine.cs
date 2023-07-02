@@ -39,7 +39,7 @@ namespace SimpleSnake.Core
                     AskForRestart();
                 }
 
-                food.PlaceFoodOnBoard(board);
+                food.PlaceFoodOnBoard(snake);
                 snake.Move();
                 snake.Eat(food);
 
