@@ -19,7 +19,7 @@ namespace SimpleSnake.Models
         private int Row { get; set; }
         private int Col { get; set; }
 
-        public void CreateSnake(GameBoard board)
+        public void CreateSnake()
         {
             char symbol = BodySymbol;
 
@@ -30,7 +30,8 @@ namespace SimpleSnake.Models
                     symbol = HeadSymbol;
                 }
 
-                board.Board[row, Col] = symbol;
+                Console.SetCursorPosition(Col, row);
+                Console.Write(symbol);
                 SnakeBody.Add(new(row, Col));
             }
         }
@@ -47,7 +48,6 @@ namespace SimpleSnake.Models
             Console.SetCursorPosition(Col, Row);
             Console.Write(HeadSymbol);
             SnakeBody.Add(new(Row, Col));
-            headPosition = SnakeBody[SnakeBody.Count - 1];
         }
 
         public void Eat(Food food)
@@ -71,12 +71,16 @@ namespace SimpleSnake.Models
 
         public bool IsMoving(GameBoard board)
         {
+            Position headPosition = SnakeBody[SnakeBody.Count - 1];
+            SnakeBody.RemoveAt(SnakeBody.Count - 1);
+
             if (Row == 0 || Row == 19 || Col == 0 || Col == 39 ||
-                board.Board[Row, Col] == BodySymbol)
+                SnakeBody.Any(p => p.Row == headPosition.Row && p.Col == headPosition.Col))
             {
                 return false;
             }
 
+            SnakeBody.Add(headPosition);
             return true;
         }
 
