@@ -1,6 +1,7 @@
 ﻿using SimpleSnake.Core.Interfaces;
 using SimpleSnake.Enums;
 using SimpleSnake.Models;
+using SimpleSnake.Constants;
 
 namespace SimpleSnake.Core
 {
@@ -13,8 +14,8 @@ namespace SimpleSnake.Core
 
         public Engine()
         {
-            board = new GameBoard(20, 40);
-            snake = new Snake(6, 20);
+            board = new GameBoard(Constant.RowIndex, Constant.ColumnIndex);
+            snake = new Snake(Constant.SnakeStartLength, Constant.ColumnIndex / 2);
             food = new Food();
             direction = Direction.Down;
         }
@@ -44,13 +45,13 @@ namespace SimpleSnake.Core
                 snake.Eat(food);
 
                 ShowScore(snake);
-                Thread.Sleep(150);
+                Thread.Sleep(Constant.ThreadSleep);
             }
         }
 
         private void ShowScore(Snake snake)
         {
-            Console.SetCursorPosition(41, 0);
+            Console.SetCursorPosition(Constant.ColumnIndex + 1, 0);
             Console.WriteLine($"Score: {snake.Score}");
         }
 

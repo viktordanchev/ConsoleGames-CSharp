@@ -1,4 +1,6 @@
-﻿namespace SimpleSnake.Models
+﻿using SimpleSnake.Constants;
+
+namespace SimpleSnake.Models
 {
     public class Food
     {
@@ -19,8 +21,8 @@
 
             do
             {
-                row = random.Next(1, 19);
-                col = random.Next(1, 39);
+                row = random.Next(1, Constant.RowIndex - 1);
+                col = random.Next(1, Constant.ColumnIndex - 1);
             } while (snake.SnakeBody.Any(p => p.Row == row && p.Col == col));
 
             if (Position.Row == 0 && Position.Col == 0)

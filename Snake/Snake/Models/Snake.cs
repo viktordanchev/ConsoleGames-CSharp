@@ -1,4 +1,5 @@
 ﻿using SimpleSnake.Enums;
+using SimpleSnake.Constants;
 
 namespace SimpleSnake.Models
 {
@@ -23,9 +24,9 @@ namespace SimpleSnake.Models
         {
             char symbol = BodySymbol;
 
-            for (int row = 1; row <= 6; row++)
+            for (int row = 1; row <= Constant.SnakeStartLength; row++)
             {
-                if (row == 6)
+                if (row == Constant.SnakeStartLength)
                 {
                     symbol = HeadSymbol;
                 }
@@ -74,7 +75,7 @@ namespace SimpleSnake.Models
             Position headPosition = SnakeBody[SnakeBody.Count - 1];
             SnakeBody.RemoveAt(SnakeBody.Count - 1);
 
-            if (Row == 0 || Row == 19 || Col == 0 || Col == 39 ||
+            if (Row == 0 || Row == Constant.RowIndex - 1 || Col == 0 || Col == Constant.ColumnIndex - 1 ||
                 SnakeBody.Any(p => p.Row == headPosition.Row && p.Col == headPosition.Col))
             {
                 return false;
